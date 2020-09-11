@@ -4,10 +4,10 @@ window.addEventListener('DOMContentLoaded', () => {
 
   if (form) {
     if (existingCards) {
-      const paymentMethodControls = document.querySelector('.payment-method-controls');
+      const paymentMethodControls = document.querySelector('[data-js-payment-method-controls]')
       const useExistingCardYes = document.querySelector('#use_existing_card_yes');
       const useExistingCardNo = document.querySelector('#use_existing_card_no');
-      const existingCcRadios = document.querySelectorAll('.existing-cc-radio');
+      const existingCcRadios = document.querySelectorAll('[data-js-existing-cc-radio]');
 
       paymentMethodControls.style.display = 'none';
 
@@ -27,7 +27,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     selectors.forEach(selector => {
       selector.addEventListener('click', () => {
-        const controls = document.querySelectorAll('.payment-method-controls li');
+        const controls = paymentMethodControls.querySelectorAll('li');
         controls.forEach(control => control.style.display = 'none');
 
         if (selector.checked) {

@@ -1,7 +1,7 @@
 window.addEventListener('DOMContentLoaded', () => {
   if (document.getElementById('checkout_form_address')) {
     // Hidden by default to support browsers with javascript disabled
-    document.querySelectorAll('.js-address-fields')
+    document.querySelectorAll('[data-js-address-fields]')
       .forEach(field => field.style.display = 'block');
 
     const statesCache = {};
@@ -84,19 +84,19 @@ window.addEventListener('DOMContentLoaded', () => {
       }
     };
 
-    document.querySelectorAll('.js-trigger-state-change').forEach(element => {
+    document.querySelectorAll('[data-js-trigger-state-change] select').forEach((element) => {
       element.addEventListener('change', () => {
-        const stateContainer = document.querySelector(element.dataset.stateContainer);
+        const stateContainer = document.querySelector(element.dataset.stateContainer)
         if (stateContainer) {
-          const countryId = element.value;
-          updateState(stateContainer, countryId);
+          const countryId = element.value
+          updateState(stateContainer, countryId)
         }
-      });
-    });
+      })
+    })
 
-    document.querySelectorAll('.js-trigger-state-change:not([hidden])').forEach(element => {
-      element.dispatchEvent(new Event('change'));
-    });
+    document.querySelectorAll('[data-js-trigger-state-change] select:not([hidden])').forEach((element) => {
+      element.dispatchEvent(new Event('change'))
+    })
 
     const orderUseBilling = document.getElementById('order_use_billing');
     orderUseBilling.addEventListener('change', function() {
@@ -104,9 +104,9 @@ window.addEventListener('DOMContentLoaded', () => {
     });
 
     function update_shipping_form_state(order_use_billing) {
-      const addressInputs = document.querySelectorAll('#shipping .address-inputs');
-      const inputs = document.querySelectorAll('#shipping .address-inputs input');
-      const selects = document.querySelectorAll('#shipping .address-inputs select');
+      const addressInputs = document.querySelectorAll('#shipping [data-js-address-inputs]');
+      const inputs = document.querySelectorAll('#shipping [data-js-address-inputs] input');
+      const selects = document.querySelectorAll('#shipping [data-js-address-inputs] select');
       if (order_use_billing.checked) {
         addressInputs.forEach(addressInput => addressInput.style.display = 'none');
         inputs.forEach(input => input.setAttribute('disabled', true));
@@ -115,7 +115,7 @@ window.addEventListener('DOMContentLoaded', () => {
         addressInputs.forEach(addressInput => addressInput.style.display = 'block');
         inputs.forEach(input => input.removeAttribute('disabled'));
         selects.forEach(sel => sel.removeAttribute('disabled'));
-        document.querySelector('#shipping .js-trigger-state-change').dispatchEvent(new Event('change'));
+        document.querySelector('#shipping [data-js-trigger-state-change]').dispatchEvent(new Event('change'))
       }
     };
 

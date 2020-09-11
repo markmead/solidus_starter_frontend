@@ -2,7 +2,7 @@ window.addEventListener('DOMContentLoaded', () => {
   function updateVariantPrice(variant) {
     const variantPrice = variant.dataset.price;
     if (variantPrice) {
-      document.querySelector('.price.selling').innerHTML = variantPrice;
+      document.querySelector('[data-js-product-price]').innerHTML = variantPrice
     }
   };
 

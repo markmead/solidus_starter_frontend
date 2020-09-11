@@ -4,7 +4,7 @@
   end
 %>
 
-<div class="address-inputs">
+<div class="address-inputs" data-js-address-inputs>
   <%= render(
     "spree/components/forms/inputs/text",
     autocomplete: "#{address_type} given-name",
@@ -66,25 +66,27 @@
     value: address.city
   ) %>
 
-  <%= render(
-    "spree/components/forms/inputs/collection_select",
-    autocomplete: "#{address_type} country-name",
-    collection: available_countries,
-    form: form,
-    id: generate_id(form, "country_id"),
-    input_class: "js-trigger-state-change",
-    label: t("spree.country"),
-    method: :country_id,
-    required: true,
-    state_container: "##{address_type} .js-address-fields",
-    text_method: :name,
-    value_method: :id
-  ) %>
+  <div data-js-trigger-state-change>
+    <%= render(
+      "spree/components/forms/inputs/collection_select",
+      autocomplete: "#{address_type} country-name",
+      collection: available_countries,
+      form: form,
+      id: generate_id(form, "country_id"),
+      input_class: "js-trigger-state-change",
+      label: t("spree.country"),
+      method: :country_id,
+      required: true,
+      state_container: "##{address_type} data-js-address-fields",
+      text_method: :name,
+      value_method: :id
+    ) %>
+  </div>
 
   <% if Spree::Config[:address_requires_state] %>
     <% have_states = !address.country.states.empty? %>
 
-    <span class="js-address-fields" style="display: none;">
+    <span class="js-address-fields" style="display: none;" data-js-address-fields>
       <%= render(
         "spree/components/forms/inputs/collection_select",
         autocomplete: "#{address_type} address-level1",
